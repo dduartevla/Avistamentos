@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerAvistamento = findViewById(R.id.recyclerAvistamento);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerAvistamento.setLayoutManager(layoutManager);
-
-        avistamentoAdapter = new AvistamentoAdapter(avistamentos);
+        AvistamentoAdapter.OnAvistamentoClickListener listener = new AvistamentoAdapter.OnAvistamentoClickListener() {
+            @Override
+            public void onAvistamentoClick(View view, int position) {
+                Avistamento avistamento = avistamentos.get(position);
+                avistamento.setAvistamento(avistamento.getAvistamento()+1);
+                avistamentoAdapter.notifyItemChanged(position);
+            }
+        };
+        avistamentoAdapter = new AvistamentoAdapter(avistamentos,listener);
         recyclerAvistamento.setAdapter(avistamentoAdapter);
     }
 }

@@ -13,9 +13,11 @@ import java.util.List;
 
 public class AvistamentoAdapter extends RecyclerView.Adapter<AvistamentoAdapter.AvistamentoViewHolder> {
     private List<Avistamento> avistamentos;
+    private OnAvistamentoClickListener listener;
 
-    public AvistamentoAdapter(List<Avistamento> avistamentos) {
+    public AvistamentoAdapter(List<Avistamento> avistamentos, OnAvistamentoClickListener listener) {
         this.avistamentos = avistamentos;
+        this.listener = listener;
     }
 
     @NonNull
@@ -33,7 +35,7 @@ public class AvistamentoAdapter extends RecyclerView.Adapter<AvistamentoAdapter.
     Avistamento avistamento = avistamentos.get(position);
     holder.textViewNome.setText(avistamento.getNome());
     holder.textViewEspecie.setText(avistamento.getEspecie());
-    holder.textViewAvistamentos.setText(avistamento.getAvistamento());
+    holder.textViewAvistamentos.setText(avistamento.getAvistamento().toString());
     }
 
     @Override
@@ -51,6 +53,16 @@ public class AvistamentoAdapter extends RecyclerView.Adapter<AvistamentoAdapter.
             textViewNome = itemView.findViewById(R.id.textViewNome);
             textViewEspecie = itemView.findViewById(R.id.textViewEspecie);
             textViewAvistamentos = itemView.findViewById(R.id.textViewAvistamentos);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onAvistamentoClick(v,getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public interface OnAvistamentoClickListener{
+        void onAvistamentoClick(View view,int position);
     }
 }

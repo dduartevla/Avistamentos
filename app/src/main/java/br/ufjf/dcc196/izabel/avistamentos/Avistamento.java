@@ -3,7 +3,7 @@ package br.ufjf.dcc196.izabel.avistamentos;
 public class Avistamento {
     private String nome;
     private String especie;
-    private int avistamento;
+    private Integer avistamento;
 
     public Avistamento (String nome, String especie, int avistamento){
         this.nome = nome;
@@ -19,7 +19,7 @@ public class Avistamento {
         this(null, null, 0 );
     }
 
-    public int getAvistamento() {
+    public Integer getAvistamento() {
         return avistamento;
     }
 
