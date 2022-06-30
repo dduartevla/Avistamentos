@@ -12,7 +12,7 @@ public class Avistamento {
     }
 
     public Avistamento(String nome, String especie){
-        this (nome, especie, null);
+        this (nome, especie,0);
     }
 
     public Avistamento(){
