@@ -1,7 +1,10 @@
 package br.ufjf.dcc196.izabel.avistamentos;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,23 +21,36 @@ public class AvistamentoAdapter extends RecyclerView.Adapter<AvistamentoAdapter.
     @NonNull
     @Override
     public AvistamentoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        Context contexto = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(contexto);
+        View avistamentoView = inflater.inflate(R.layout.avistamento_layout,parent,false);
+        AvistamentoViewHolder viewHolder = new AvistamentoViewHolder(avistamentoView);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull AvistamentoViewHolder holder, int position) {
-
+    Avistamento avistamento = avistamentos.get(position);
+    holder.textViewNome.setText(avistamento.getNome());
+    holder.textViewEspecie.setText(avistamento.getEspecie());
+    holder.textViewAvistamentos.setText(avistamento.getAvistamento());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return avistamentos.size();
     }
 
     public class AvistamentoViewHolder extends RecyclerView.ViewHolder{
+        private TextView textViewNome;
+        private TextView textViewEspecie;
+        private TextView textViewAvistamentos;
 
         public AvistamentoViewHolder(@NonNull View itemView) {
             super(itemView);
+            textViewNome = itemView.findViewById(R.id.textViewNome);
+            textViewEspecie = itemView.findViewById(R.id.textViewEspecie);
+            textViewAvistamentos = itemView.findViewById(R.id.textViewAvistamentos);
         }
     }
 }
