@@ -17,12 +17,14 @@ public class AvistamentosRepository {
         this.context = context;
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         avistamentos = new ArrayList<Avistamento>();
+        auxBotaAvistamentos();
+        System.out.println("Avistamentos Tamanho :" + avistamentos.size());
     }
 
     private void auxBotaAvistamentos(){
-        new Avistamento("Bem-te-vi","Pitangus sulphuratus");
-        new Avistamento("Martim-pescador","Megaceryle torquata");
-        new Avistamento("João-de-barro", "Furnarius rufus");
+        avistamentos.add(new Avistamento("Bem-te-vi","Pitangus sulphuratus"));
+        avistamentos.add(new Avistamento("Martim-pescador","Megaceryle torquata"));
+        avistamentos.add(new Avistamento("João-de-barro", "Furnarius rufus"));
     }
 
     public void addAvistamento(Avistamento novoAvistamento){
@@ -31,6 +33,10 @@ public class AvistamentosRepository {
 
     public Avistamento getAvistamento(int position){
         return avistamentos.get(position);
+    }
+
+    public List<Avistamento> getAvistamentos(){
+        return this.avistamentos;
     }
 
 }

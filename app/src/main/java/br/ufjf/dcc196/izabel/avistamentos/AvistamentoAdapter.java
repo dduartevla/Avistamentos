@@ -56,6 +56,7 @@ public class AvistamentoAdapter extends RecyclerView.Adapter<AvistamentoAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //System.out.println(getAdapterPosition()+"    XXXXXXXXXXXX       ADAPTER POSITION");
                     listener.onAvistamentoClick(v,getAdapterPosition());
                 }
             });

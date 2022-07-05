@@ -16,29 +16,27 @@ public class MainActivity extends AppCompatActivity {
     List<Avistamento> avistamentos;
     AvistamentoAdapter avistamentoAdapter;
 
+    AvistamentosRepository repo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        avistamentos = new ArrayList<Avistamento>(){{
-            add (new Avistamento("Bem-te-vi","Pitangus sulphuratus"));
-            add (new Avistamento("Martim-pescador","Megaceryle torquata"));
-            add (new Avistamento("João-de-barro", "Furnarius rufus"));
-        }};
+        repo = new AvistamentosRepository(getApplicationContext());
         recyclerAvistamento = findViewById(R.id.recyclerAvistamento);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerAvistamento.setLayoutManager(layoutManager);
+
         AvistamentoAdapter.OnAvistamentoClickListener listener = new AvistamentoAdapter.OnAvistamentoClickListener() {
             @Override
             public void onAvistamentoClick(View view, int position) {
-                Avistamento avistamento = avistamentos.get(position);
+                Avistamento avistamento = repo.getAvistamento(position);
                 avistamento.setAvistamento(avistamento.getAvistamento()+1);
                 avistamentoAdapter.notifyItemChanged(position);
             }
         };
-        avistamentoAdapter = new AvistamentoAdapter(avistamentos,listener);
+        avistamentoAdapter = new AvistamentoAdapter(repo.getAvistamentos(),listener);
         recyclerAvistamento.setAdapter(avistamentoAdapter);
     }
 }
