@@ -52,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         Bundle extras;
+
+                        extras = result.getData().getExtras();
+                        String nome = extras.getString("nome");
+                        String especie = extras.getString("especie");
+
+                        Avistamento novoAvistamento= new Avistamento(nome,especie);
+                        repo.addAvistamento(novoAvistamento);
+
+                        avistamentoAdapter = new AvistamentoAdapter(repo.getAvistamentos(),listener);
+                        recyclerAvistamento.setAdapter(avistamentoAdapter);
+
                     }
                 }
         );
