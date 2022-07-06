@@ -42,6 +42,21 @@ public class MainActivity extends AppCompatActivity {
                 avistamento.setAvistamento(avistamento.getAvistamento()+1);
                 avistamentoAdapter.notifyItemChanged(position);
             }
+
+            @Override
+            public void onSubClik(View view, int position) {
+                Avistamento avistamento = repo.getAvistamento(position);
+                if (avistamento.getAvistamento()>0)
+                avistamento.setAvistamento(avistamento.getAvistamento()-1);
+                avistamentoAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onAddClick(View view, int position) {
+                Avistamento avistamento = repo.getAvistamento(position);
+                avistamento.setAvistamento(avistamento.getAvistamento()+1);
+                avistamentoAdapter.notifyItemChanged(position);
+            }
         };
         avistamentoAdapter = new AvistamentoAdapter(repo.getAvistamentos(),listener);
         recyclerAvistamento.setAdapter(avistamentoAdapter);
