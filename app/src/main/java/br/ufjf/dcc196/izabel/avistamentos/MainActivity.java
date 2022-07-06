@@ -4,13 +4,19 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     AvistamentoAdapter avistamentoAdapter;
 
     AvistamentosRepository repo;
+
+    AvistamentoAdapter.OnAvistamentoClickListener listener;
 
 
     @Override
@@ -35,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerAvistamento.setLayoutManager(layoutManager);
 
-        AvistamentoAdapter.OnAvistamentoClickListener listener = new AvistamentoAdapter.OnAvistamentoClickListener() {
+        listener = new AvistamentoAdapter.OnAvistamentoClickListener() {
             @Override
             public void onAvistamentoClick(View view, int position) {
                 Avistamento avistamento = repo.getAvistamento(position);
@@ -56,6 +64,15 @@ public class MainActivity extends AppCompatActivity {
                 Avistamento avistamento = repo.getAvistamento(position);
                 avistamento.setAvistamento(avistamento.getAvistamento()+1);
                 avistamentoAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onDeleteClick(View view, int position) {
+                repo.removeAvistamento(position);
+                avistamentoAdapter = new AvistamentoAdapter(repo.getAvistamentos(),listener);
+                recyclerAvistamento.setAdapter(avistamentoAdapter);
+                Toast.makeText(MainActivity.this,"Deletado",Toast.LENGTH_SHORT).show();
+
             }
         };
         avistamentoAdapter = new AvistamentoAdapter(repo.getAvistamentos(),listener);
@@ -81,7 +98,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerAvistamento);
     }
+
+    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            repo.getAvistamentos().remove(viewHolder.getAdapterPosition());
+            avistamentoAdapter = new AvistamentoAdapter(repo.getAvistamentos(),listener);
+            recyclerAvistamento.setAdapter(avistamentoAdapter);
+            Toast.makeText(MainActivity.this,"Deletado",Toast.LENGTH_SHORT).show();
+
+        }
+    };
 
     public void adicionaEspecie(View view){
 
@@ -90,4 +127,5 @@ public class MainActivity extends AppCompatActivity {
         launcher.launch(intent);
 
     }
+
 }

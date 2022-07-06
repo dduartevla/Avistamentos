@@ -73,6 +73,13 @@ public class AvistamentoAdapter extends RecyclerView.Adapter<AvistamentoAdapter.
                     listener.onAddClick(v,getAdapterPosition());
                 }
             });
+
+            itemView.findViewById(R.id.buttonExcluir).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDeleteClick(v,getAdapterPosition());
+                }
+            });
         }
     }
 
@@ -80,6 +87,7 @@ public class AvistamentoAdapter extends RecyclerView.Adapter<AvistamentoAdapter.
         void onAvistamentoClick(View view,int position);
         void onSubClik(View view,int position);
         void onAddClick(View view, int position);
+        void onDeleteClick(View view, int position);
     }
 
 }

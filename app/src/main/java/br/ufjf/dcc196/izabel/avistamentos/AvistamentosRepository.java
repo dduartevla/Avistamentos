@@ -39,4 +39,10 @@ public class AvistamentosRepository {
         return this.avistamentos;
     }
 
+    public void removeAvistamento(int posicao){avistamentos.remove(posicao);
+    for (int i=0; i<avistamentos.size(); i++){
+        System.out.println(avistamentos.get(i).getNome());
+    }
+    }
+
 }
