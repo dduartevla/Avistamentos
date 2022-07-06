@@ -15,7 +15,7 @@
         android:layout_marginStart="10dp"
         android:text="TextView"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/buttonExcluir"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,12 +23,13 @@
         android:id="@+id/textViewAvistamentos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:backgroundTint="#00FFFFFF"
         android:text="0"
         android:textSize="34sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton7"
-        app:layout_constraintStart_toEndOf="@+id/imageButton6"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSub"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonAdd"
         app:layout_constraintTop_toBottomOf="@+id/textViewEspecie" />
 
     <TextView
@@ -43,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/buttonExcluir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
@@ -51,34 +52,35 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewEspecie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewNome"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-    <ImageButton
-        android:id="@+id/imageButton6"
+    <Button
+        android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:background="#00FFFFFF"
         android:backgroundTint="#00FFFFFF"
-        android:tint="#575656"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton7"
+        android:text="+1"
+        android:textColor="#555353"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewAvistamentos"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAvistamentos"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEspecie"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton7"
+    <Button
+        android:id="@+id/buttonSub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:background="#00FFFFFF"
         android:backgroundTint="#00FFFFFF"
-        android:tint="#575656"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="-1"
+        android:textColor="#555353"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewAvistamentos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton6"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEspecie"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:layout_constraintStart_toEndOf="@+id/textViewAvistamentos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
