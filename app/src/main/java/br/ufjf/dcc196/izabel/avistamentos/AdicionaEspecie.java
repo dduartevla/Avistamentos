@@ -1,6 +1,8 @@
 package br.ufjf.dcc196.izabel.avistamentos;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,11 +10,14 @@ import android.widget.EditText;
 
 public class AdicionaEspecie extends AppCompatActivity {
 
-    Button buttonSalvar;
-    Button buttonCancelar;
+    private Button buttonSalvar;
+    private Button buttonCancelar;
 
-    EditText editTextNome;
-    EditText editTextEspecie;
+    private EditText editTextNome;
+    private EditText editTextEspecie;
+
+    private String nome;
+    private String especie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,24 @@ public class AdicionaEspecie extends AppCompatActivity {
     }
 
     public void buttonSalvarClick(View view){
+        try {
+            Intent novaEspecie = new Intent();
 
+            nome = editTextNome.getText().toString();
+            especie = editTextEspecie.getText().toString();
+
+            novaEspecie.putExtra("nome", nome);
+            novaEspecie.putExtra("especie", especie);
+
+            setResult(1, novaEspecie);
+            finish();
+        } catch (Exception e){
+            editTextNome.selectAll();
+            editTextEspecie.requestFocus();
+
+            editTextEspecie.selectAll();
+            editTextEspecie.requestFocus();
+        }
     }
 
     public void buttonCancelarClick(View view){
