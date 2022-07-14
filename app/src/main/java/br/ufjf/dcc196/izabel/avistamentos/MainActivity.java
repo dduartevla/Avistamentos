@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     AvistamentoAdapter.OnAvistamentoClickListener listener;
 
+    private AppDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         repo = new AvistamentosRepository(getApplicationContext());
+
+        db = AppDatabase.getInstance(getApplicationContext());
+//        Avistamento a1 = new Avistamento("Bem-te-vu","Pitangus sulphuratus");
+//        db.avistamentoDao().criar(a1);
+
+        avistamentos = db.avistamentoDao().listarTodos();
+        Avistamento a1 = db.avistamentoDao().buscaPorId(1L);
+        repo.addAvistamento(a1);
+        a1.setNome("Bem-te-vei");
+        db.avistamentoDao().salvar(a1);
+        System.out.println(a1.getNome());
+
+
+
         recyclerAvistamento = findViewById(R.id.recyclerAvistamento);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerAvistamento.setLayoutManager(layoutManager);

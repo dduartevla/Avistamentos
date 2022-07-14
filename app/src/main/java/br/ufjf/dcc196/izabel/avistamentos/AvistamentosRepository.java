@@ -22,9 +22,9 @@ public class AvistamentosRepository {
     }
 
     private void auxBotaAvistamentos(){
-        avistamentos.add(new Avistamento("Bem-te-vi","Pitangus sulphuratus"));
-        avistamentos.add(new Avistamento("Martim-pescador","Megaceryle torquata"));
-        avistamentos.add(new Avistamento("João-de-barro", "Furnarius rufus"));
+        //avistamentos.add(new Avistamento("Bem-te-vi","Pitangus sulphuratus"));
+       //avistamentos.add(new Avistamento("Martim-pescador","Megaceryle torquata"));
+        //avistamentos.add(new Avistamento("João-de-barro", "Furnarius rufus"));
     }
 
     public void addAvistamento(Avistamento novoAvistamento){
